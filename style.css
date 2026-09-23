@@ -1,0 +1,1938 @@
+:root {
+  --bg: #050914;
+  --bg-soft: #081120;
+  --panel: rgba(10, 18, 35, 0.72);
+  --panel-strong: rgba(11, 21, 40, 0.92);
+  --border: rgba(255, 255, 255, 0.10);
+
+  --text: #f5f7ff;
+  --muted: #a9b4ca;
+
+  --cyan: #00e5ff;
+  --violet: #7b61ff;
+  --pink: #ff4ecd;
+
+  --success: #51f2a4;
+  --danger: #ff6b81;
+
+  --radius: 22px;
+  --radius-small: 14px;
+
+  --shadow:
+    0 20px 60px rgba(0, 0, 0, 0.30);
+
+  --transition:
+    180ms ease;
+
+  --content-width: 1220px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 50% -20%,
+      rgba(0, 229, 255, 0.08),
+      transparent 40%
+    ),
+    var(--bg);
+
+  color: var(--text);
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  overflow-x: hidden;
+}
+
+/* =========================================================
+   NOVA FLOW GLOBAL
+   ========================================================= */
+
+#nova {
+  position: fixed;
+
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: block;
+
+  pointer-events: none;
+
+  z-index: 0;
+
+  opacity: 1;
+
+  contain: strict;
+}
+
+#novaGlow {
+  position: fixed;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: 1;
+
+  background:
+    radial-gradient(
+      circle at var(--nova-x, 50%)
+      var(--nova-y, 50%),
+      rgba(0, 229, 255, 0.055),
+      transparent 28%
+    );
+
+  opacity: 0.8;
+
+  transition:
+    opacity 250ms ease;
+}
+
+#app {
+  position: relative;
+
+  z-index: 2;
+
+  isolation: isolate;
+}
+
+/*
+  El fondo NOVA está debajo de toda la interfaz.
+  Ninguna tarjeta necesita tener un fondo totalmente opaco,
+  para permitir que el movimiento siga siendo visible.
+*/
+
+/* =========================================================
+   BARRA SUPERIOR
+   ========================================================= */
+
+.topbar {
+  position: sticky;
+
+  top: 0;
+
+  z-index: 50;
+
+  width: 100%;
+
+  min-height: 72px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding:
+    12px
+    max(18px, calc((100vw - var(--content-width)) / 2));
+
+  background:
+    rgba(5, 9, 20, 0.66);
+
+  border-bottom:
+    1px solid var(--border);
+
+  backdrop-filter:
+    blur(18px)
+    saturate(130%);
+
+  -webkit-backdrop-filter:
+    blur(18px)
+    saturate(130%);
+}
+
+/* =========================================================
+   MARCA
+   ========================================================= */
+
+.brand {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  color: var(--text);
+
+  text-decoration: none;
+
+  min-width: 0;
+}
+
+.brandIcon {
+  width: 45px;
+  height: 45px;
+
+  flex: 0 0 45px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 15px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(0, 229, 255, 0.12),
+      rgba(123, 97, 255, 0.14)
+    );
+
+  border:
+    1px solid rgba(0, 229, 255, 0.20);
+
+  box-shadow:
+    0 0 30px rgba(0, 229, 255, 0.10);
+}
+
+.brandIcon svg {
+  width: 34px;
+  height: 34px;
+}
+
+.brandText {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2px;
+
+  min-width: 0;
+}
+
+.brandText strong {
+  font-size: 1.05rem;
+
+  line-height: 1;
+
+  letter-spacing: -0.02em;
+}
+
+.brandText span {
+  color: var(--muted);
+
+  font-size: 0.68rem;
+
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   BOTONES
+   ========================================================= */
+
+.topActions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.iconButton {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 13px;
+
+  background:
+    rgba(255, 255, 255, 0.045);
+
+  color: var(--text);
+
+  transition:
+    transform var(--transition),
+    background var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.iconButton:hover {
+  transform: translateY(-2px);
+
+  border-color:
+    rgba(0, 229, 255, 0.35);
+
+  background:
+    rgba(0, 229, 255, 0.08);
+
+  box-shadow:
+    0 8px 25px rgba(0, 229, 255, 0.08);
+}
+
+.iconButton:active {
+  transform: translateY(0) scale(0.96);
+}
+
+.primaryButton,
+.secondaryButton {
+  min-height: 46px;
+
+  padding:
+    0 18px;
+
+  border-radius: 14px;
+
+  border: 1px solid transparent;
+
+  color: var(--text);
+
+  font-weight: 700;
+
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    background var(--transition),
+    border-color var(--transition);
+}
+
+.primaryButton {
+  background:
+    linear-gradient(
+      135deg,
+      var(--cyan),
+      var(--violet)
+    );
+
+  color: #04101a;
+
+  box-shadow:
+    0 10px 30px rgba(0, 229, 255, 0.14);
+}
+
+.primaryButton:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 15px 35px rgba(0, 229, 255, 0.22);
+}
+
+.secondaryButton {
+  background:
+    rgba(255, 255, 255, 0.055);
+
+  border-color:
+    var(--border);
+}
+
+.secondaryButton:hover {
+  transform: translateY(-2px);
+
+  border-color:
+    rgba(123, 97, 255, 0.42);
+
+  background:
+    rgba(123, 97, 255, 0.10);
+}
+
+/* =========================================================
+   SECCIONES
+   ========================================================= */
+
+.section {
+  width: min(
+    var(--content-width),
+    calc(100% - 36px)
+  );
+
+  margin:
+    0 auto;
+
+  padding:
+    88px 0;
+}
+
+.sectionHeading {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 30px;
+
+  margin-bottom: 30px;
+}
+
+.sectionKicker {
+  display: block;
+
+  margin-bottom: 9px;
+
+  color: var(--cyan);
+
+  font-size: 0.72rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.18em;
+
+  text-transform: uppercase;
+}
+
+.sectionHeading h2 {
+  margin: 0;
+
+  font-size:
+    clamp(1.8rem, 4vw, 3rem);
+
+  letter-spacing: -0.045em;
+}
+
+.sectionHeading p {
+  max-width: 650px;
+
+  margin:
+    10px 0 0;
+
+  color: var(--muted);
+
+  line-height: 1.7;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+  min-height:
+    calc(100vh - 72px);
+
+  display: grid;
+
+  align-content: center;
+
+  gap: 50px;
+
+  padding-top: 70px;
+}
+
+.heroContent {
+  max-width: 850px;
+}
+
+.eyebrow {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding:
+    8px 12px;
+
+  border:
+    1px solid rgba(0, 229, 255, 0.18);
+
+  border-radius: 999px;
+
+  background:
+    rgba(0, 229, 255, 0.055);
+
+  color: #c8faff;
+
+  font-size: 0.72rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.14em;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: var(--success);
+
+  box-shadow:
+    0 0 14px var(--success);
+}
+
+.hero h1 {
+  margin:
+    22px 0 18px;
+
+  max-width: 900px;
+
+  font-size:
+    clamp(3.2rem, 9vw, 7.5rem);
+
+  line-height: 0.92;
+
+  letter-spacing: -0.075em;
+}
+
+.hero h1 span {
+  display: block;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--cyan),
+      var(--violet),
+      var(--pink)
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+}
+
+.heroContent > p {
+  max-width: 700px;
+
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size:
+    clamp(1rem, 2vw, 1.2rem);
+
+  line-height: 1.75;
+}
+
+.heroActions {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-top: 30px;
+}
+
+/* =========================================================
+   ESTADÍSTICAS
+   ========================================================= */
+
+.stats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 14px;
+
+  max-width: 760px;
+}
+
+.statCard {
+  padding: 20px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: var(--radius);
+
+  background:
+    rgba(8, 16, 31, 0.48);
+
+  backdrop-filter:
+    blur(10px);
+
+  box-shadow:
+    var(--shadow);
+}
+
+.statCard strong {
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-size: 1.8rem;
+}
+
+.statCard span {
+  color: var(--muted);
+
+  font-size: 0.85rem;
+}
+
+/* =========================================================
+   NOVA FLOW
+   ========================================================= */
+
+.novaSection {
+  position: relative;
+}
+
+.novaStatus {
+  padding:
+    9px 13px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(81, 242, 164, 0.08);
+
+  border:
+    1px solid rgba(81, 242, 164, 0.22);
+
+  color: var(--success);
+
+  font-size: 0.75rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.12em;
+}
+
+.novaInfoGrid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-bottom: 18px;
+}
+
+.novaInfoCard {
+  padding: 18px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: var(--radius);
+
+  background:
+    rgba(8, 16, 31, 0.52);
+
+  backdrop-filter:
+    blur(12px);
+}
+
+.novaInfoCard span {
+  display: block;
+
+  color: var(--muted);
+
+  font-size: 0.78rem;
+
+  margin-bottom: 7px;
+}
+
+.novaInfoCard strong {
+  font-size: 1.15rem;
+}
+
+/* =========================================================
+   CONTROLES NOVA
+   ========================================================= */
+
+.novaControls {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-items: flex-end;
+
+  gap: 14px;
+
+  margin-bottom: 24px;
+
+  padding: 18px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: var(--radius);
+
+  background:
+    rgba(7, 14, 28, 0.52);
+
+  backdrop-filter:
+    blur(14px);
+}
+
+.novaControls label {
+  min-width: 190px;
+
+  display: grid;
+
+  gap: 8px;
+
+  color: var(--muted);
+
+  font-size: 0.8rem;
+
+  font-weight: 700;
+}
+
+.novaControls input[type="range"] {
+  width: 100%;
+
+  accent-color: var(--cyan);
+
+  cursor: pointer;
+}
+
+.novaControls select {
+  min-height: 42px;
+
+  padding:
+    0 12px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 12px;
+
+  background:
+    rgba(255, 255, 255, 0.055);
+
+  color: var(--text);
+
+  outline: none;
+}
+
+/* =========================================================
+   MODOS NOVA
+   ========================================================= */
+
+.novaModes {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fill,
+      minmax(145px, 1fr)
+    );
+
+  gap: 10px;
+}
+
+.novaMode {
+  min-height: 68px;
+
+  padding: 12px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 15px;
+
+  background:
+    rgba(7, 14, 28, 0.48);
+
+  color: var(--text);
+
+  text-align: left;
+
+  transition:
+    transform var(--transition),
+    border-color var(--transition),
+    background var(--transition),
+    box-shadow var(--transition);
+}
+
+.novaMode:hover {
+  transform: translateY(-3px);
+
+  border-color:
+    rgba(0, 229, 255, 0.30);
+
+  background:
+    rgba(0, 229, 255, 0.065);
+}
+
+.novaMode.active {
+  border-color:
+    rgba(0, 229, 255, 0.55);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0, 229, 255, 0.12),
+      rgba(123, 97, 255, 0.12)
+    );
+
+  box-shadow:
+    0 0 28px rgba(0, 229, 255, 0.08);
+}
+
+.novaModeNumber {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: var(--cyan);
+
+  font-size: 0.68rem;
+
+  font-weight: 800;
+}
+
+.novaModeName {
+  display: block;
+
+  color: var(--text);
+
+  font-size: 0.82rem;
+
+  font-weight: 700;
+}
+
+/* =========================================================
+   BUSCADOR
+   ========================================================= */
+
+.searchBox {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  width: 100%;
+
+  margin-bottom: 18px;
+}
+
+.searchBox input {
+  width: 100%;
+
+  min-height: 58px;
+
+  padding:
+    0 90px 0 50px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 18px;
+
+  outline: none;
+
+  background:
+    rgba(8, 16, 31, 0.60);
+
+  color: var(--text);
+
+  backdrop-filter:
+    blur(12px);
+
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.searchBox input::placeholder {
+  color:
+    rgba(169, 180, 202, 0.62);
+}
+
+.searchBox input:focus {
+  border-color:
+    rgba(0, 229, 255, 0.42);
+
+  box-shadow:
+    0 0 0 4px rgba(0, 229, 255, 0.055);
+}
+
+.searchIcon {
+  position: absolute;
+
+  left: 18px;
+
+  z-index: 2;
+
+  color: var(--cyan);
+
+  font-size: 1.3rem;
+}
+
+.searchBox kbd {
+  position: absolute;
+
+  right: 14px;
+
+  padding:
+    5px 8px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 7px;
+
+  background:
+    rgba(255, 255, 255, 0.05);
+
+  color: var(--muted);
+
+  font-size: 0.68rem;
+}
+
+/* =========================================================
+   CATEGORÍAS
+   ========================================================= */
+
+.categories {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-bottom: 24px;
+}
+
+.category {
+  padding:
+    9px 13px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 999px;
+
+  background:
+    rgba(255, 255, 255, 0.035);
+
+  color: var(--muted);
+
+  font-weight: 700;
+
+  transition:
+    all var(--transition);
+}
+
+.category:hover {
+  color: var(--text);
+
+  border-color:
+    rgba(0, 229, 255, 0.25);
+}
+
+.category.active {
+  color: #031018;
+
+  background:
+    var(--cyan);
+
+  border-color:
+    var(--cyan);
+}
+
+/* =========================================================
+   HERRAMIENTAS
+   ========================================================= */
+
+.toolGrid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fill,
+      minmax(210px, 1fr)
+    );
+
+  gap: 14px;
+}
+
+.toolCard {
+  position: relative;
+
+  min-height: 175px;
+
+  padding: 20px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: var(--radius);
+
+  background:
+    rgba(8, 16, 31, 0.55);
+
+  color: var(--text);
+
+  text-align: left;
+
+  overflow: hidden;
+
+  backdrop-filter:
+    blur(13px);
+
+  transition:
+    transform var(--transition),
+    border-color var(--transition),
+    background var(--transition),
+    box-shadow var(--transition);
+}
+
+.toolCard::after {
+  content: "";
+
+  position: absolute;
+
+  inset: auto -30px -50px auto;
+
+  width: 130px;
+  height: 130px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(0, 229, 255, 0.12),
+      transparent 68%
+    );
+
+  pointer-events: none;
+}
+
+.toolCard:hover {
+  transform:
+    translateY(-5px);
+
+  border-color:
+    rgba(0, 229, 255, 0.27);
+
+  background:
+    rgba(10, 20, 38, 0.68);
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.20);
+}
+
+.toolCardIcon {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  margin-bottom: 16px;
+
+  border-radius: 13px;
+
+  background:
+    rgba(0, 229, 255, 0.08);
+
+  color: var(--cyan);
+
+  font-size: 1.2rem;
+}
+
+.toolCard h3 {
+  margin:
+    0 0 7px;
+
+  font-size: 1rem;
+}
+
+.toolCard p {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 0.82rem;
+
+  line-height: 1.55;
+}
+
+.favoriteButton {
+  position: absolute;
+
+  top: 13px;
+  right: 13px;
+
+  width: 32px;
+  height: 32px;
+
+  display: grid;
+  place-items: center;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 9px;
+
+  background:
+    rgba(255, 255, 255, 0.04);
+
+  color: var(--muted);
+}
+
+.favoriteButton.active {
+  color: #ffd45a;
+
+  border-color:
+    rgba(255, 212, 90, 0.25);
+
+  background:
+    rgba(255, 212, 90, 0.08);
+}
+
+/* =========================================================
+   ACCESO RÁPIDO
+   ========================================================= */
+
+.quickTools {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fill,
+      minmax(180px, 1fr)
+    );
+
+  gap: 12px;
+}
+
+.quickTool {
+  padding: 16px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 17px;
+
+  background:
+    rgba(8, 16, 31, 0.48);
+
+  color: var(--text);
+
+  text-align: left;
+
+  transition:
+    transform var(--transition),
+    border-color var(--transition);
+}
+
+.quickTool:hover {
+  transform: translateY(-3px);
+
+  border-color:
+    rgba(123, 97, 255, 0.35);
+}
+
+/* =========================================================
+   PRODUCTIVIDAD
+   ========================================================= */
+
+.personalGrid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+.featureCard {
+  min-height: 170px;
+
+  padding: 22px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  justify-content: flex-end;
+
+  gap: 7px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: var(--radius);
+
+  background:
+    rgba(8, 16, 31, 0.52);
+
+  color: var(--text);
+
+  text-align: left;
+
+  transition:
+    transform var(--transition),
+    border-color var(--transition),
+    background var(--transition);
+}
+
+.featureCard:hover {
+  transform: translateY(-4px);
+
+  border-color:
+    rgba(255, 78, 205, 0.25);
+
+  background:
+    rgba(16, 22, 42, 0.68);
+}
+
+.featureIcon {
+  margin-bottom: auto;
+
+  width: 45px;
+  height: 45px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 13px;
+
+  background:
+    rgba(123, 97, 255, 0.10);
+
+  color: #bcb0ff;
+
+  font-weight: 800;
+}
+
+.featureCard strong {
+  font-size: 1rem;
+}
+
+.featureCard small {
+  color: var(--muted);
+}
+
+/* =========================================================
+   DATOS
+   ========================================================= */
+
+.dataActions {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+  width: min(
+    var(--content-width),
+    calc(100% - 36px)
+  );
+
+  margin:
+    0 auto;
+
+  padding:
+    50px 0 35px;
+
+  border-top:
+    1px solid var(--border);
+
+  color: var(--muted);
+}
+
+.footerBrand {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 16px;
+
+  color: var(--text);
+}
+
+.footerIcon {
+  width: 38px;
+  height: 38px;
+}
+
+.footerIcon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.footerBrand strong,
+.footerBrand span {
+  display: block;
+}
+
+.footerBrand span {
+  margin-top: 3px;
+
+  color: var(--muted);
+
+  font-size: 0.68rem;
+
+  letter-spacing: 0.14em;
+}
+
+.connectionStatus {
+  display: inline-flex;
+
+  padding:
+    7px 10px;
+
+  margin-bottom: 10px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 999px;
+
+  font-size: 0.72rem;
+}
+
+/* =========================================================
+   PANEL DE HERRAMIENTA
+   ========================================================= */
+
+.toolPanel {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 100;
+
+  visibility: hidden;
+
+  pointer-events: none;
+}
+
+.toolPanel.open {
+  visibility: visible;
+
+  pointer-events: auto;
+}
+
+.toolPanelBackdrop {
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    rgba(0, 0, 0, 0.55);
+
+  backdrop-filter:
+    blur(5px);
+
+  opacity: 0;
+
+  transition:
+    opacity 220ms ease;
+}
+
+.toolPanel.open .toolPanelBackdrop {
+  opacity: 1;
+}
+
+.toolPanelContent {
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  width:
+    min(680px, 100%);
+
+  height: 100%;
+
+  overflow-y: auto;
+
+  padding: 26px;
+
+  background:
+    rgba(7, 14, 28, 0.96);
+
+  border-left:
+    1px solid var(--border);
+
+  box-shadow:
+    -20px 0 70px rgba(0, 0, 0, 0.30);
+
+  transform:
+    translateX(100%);
+
+  transition:
+    transform 260ms ease;
+}
+
+.toolPanel.open .toolPanelContent {
+  transform:
+    translateX(0);
+}
+
+.toolPanelHeader {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 25px;
+}
+
+#toolPanelIcon {
+  display: inline-grid;
+
+  width: 42px;
+  height: 42px;
+
+  place-items: center;
+
+  margin-bottom: 12px;
+
+  border-radius: 13px;
+
+  background:
+    rgba(0, 229, 255, 0.08);
+
+  color: var(--cyan);
+}
+
+#toolPanelCategory {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: var(--muted);
+
+  font-size: 0.75rem;
+}
+
+#toolPanelTitle {
+  margin: 0;
+
+  font-size: 1.8rem;
+}
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.modal {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 110;
+
+  display: grid;
+
+  place-items: center;
+
+  padding: 20px;
+
+  visibility: hidden;
+
+  pointer-events: none;
+}
+
+.modal.open {
+  visibility: visible;
+
+  pointer-events: auto;
+}
+
+.modalBackdrop {
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    rgba(0, 0, 0, 0.60);
+
+  backdrop-filter:
+    blur(7px);
+
+  opacity: 0;
+
+  transition:
+    opacity 200ms ease;
+}
+
+.modal.open .modalBackdrop {
+  opacity: 1;
+}
+
+.modalContent {
+  position: relative;
+
+  width:
+    min(680px, 100%);
+
+  max-height:
+    min(850px, 90vh);
+
+  overflow-y: auto;
+
+  padding: 28px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 24px;
+
+  background:
+    rgba(8, 16, 31, 0.96);
+
+  box-shadow:
+    var(--shadow);
+
+  transform:
+    translateY(15px)
+    scale(0.98);
+
+  opacity: 0;
+
+  transition:
+    transform 220ms ease,
+    opacity 220ms ease;
+}
+
+.modal.open .modalContent {
+  transform:
+    translateY(0)
+    scale(1);
+
+  opacity: 1;
+}
+
+.modalClose {
+  position: absolute;
+
+  top: 15px;
+  right: 15px;
+}
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+.toast {
+  position: fixed;
+
+  left: 50%;
+  bottom: 25px;
+
+  z-index: 200;
+
+  max-width:
+    min(460px, calc(100% - 30px));
+
+  padding:
+    12px 16px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 14px;
+
+  background:
+    rgba(8, 16, 31, 0.94);
+
+  color: var(--text);
+
+  box-shadow:
+    var(--shadow);
+
+  backdrop-filter:
+    blur(14px);
+
+  transform:
+    translate(-50%, 25px);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+
+  transform:
+    translate(-50%, 0);
+}
+
+/* =========================================================
+   ESTADOS
+   ========================================================= */
+
+body.focus-mode .topbar {
+  opacity: 0.35;
+}
+
+body.focus-mode .topbar:hover {
+  opacity: 1;
+}
+
+body.focus-mode .hero {
+  min-height: 100vh;
+}
+
+body.motion-off #nova {
+  opacity: 0;
+}
+
+body.motion-off #novaGlow {
+  opacity: 0;
+}
+
+/* =========================================================
+   TEMA CLARO
+   ========================================================= */
+
+body.light {
+  --bg: #edf3fb;
+  --bg-soft: #e5edf8;
+
+  --panel: rgba(255, 255, 255, 0.78);
+  --panel-strong: rgba(255, 255, 255, 0.94);
+
+  --border: rgba(15, 30, 55, 0.12);
+
+  --text: #101a2d;
+  --muted: #52627a;
+
+  background:
+    radial-gradient(
+      circle at 50% -20%,
+      rgba(0, 150, 220, 0.12),
+      transparent 40%
+    ),
+    var(--bg);
+}
+
+body.light .topbar {
+  background:
+    rgba(237, 243, 251, 0.76);
+}
+
+body.light .toolPanelContent,
+body.light .modalContent {
+  background:
+    rgba(245, 249, 255, 0.96);
+}
+
+body.light .searchBox input,
+body.light .toolCard,
+body.light .featureCard,
+body.light .novaInfoCard,
+body.light .statCard,
+body.light .novaControls,
+body.light .novaMode,
+body.light .quickTool {
+  background:
+    rgba(255, 255, 255, 0.66);
+}
+
+/* =========================================================
+   RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .section {
+    padding:
+      70px 0;
+  }
+
+  .hero {
+    min-height:
+      auto;
+
+    padding-top:
+      75px;
+  }
+
+  .personalGrid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .novaInfoGrid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+  .novaModes {
+    grid-template-columns:
+      repeat(
+        auto-fill,
+        minmax(130px, 1fr)
+      );
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — MÓVIL
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+  .topbar {
+    min-height: 64px;
+
+    padding:
+      10px 14px;
+  }
+
+  .brandIcon {
+    width: 40px;
+    height: 40px;
+
+    flex-basis: 40px;
+  }
+
+  .brandText span {
+    font-size: 0.58rem;
+  }
+
+  .topActions {
+    gap: 5px;
+  }
+
+  .iconButton {
+    width: 38px;
+    height: 38px;
+  }
+
+  .section {
+    width:
+      calc(100% - 24px);
+
+    padding:
+      58px 0;
+  }
+
+  .hero {
+    padding-top:
+      55px;
+  }
+
+  .hero h1 {
+    font-size:
+      clamp(3rem, 17vw, 5rem);
+  }
+
+  .heroActions {
+    flex-direction: column;
+  }
+
+  .heroActions button {
+    width: 100%;
+  }
+
+  .stats {
+    grid-template-columns:
+      1fr;
+
+    max-width: none;
+  }
+
+  .sectionHeading {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .novaInfoGrid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .novaControls {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+  .novaControls label {
+    width: 100%;
+  }
+
+  .novaControls button {
+    width: 100%;
+  }
+
+  .novaModes {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .toolGrid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .personalGrid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .searchBox kbd {
+    display: none;
+  }
+
+  .searchBox input {
+    padding-right: 18px;
+  }
+
+  .toolPanelContent {
+    width: 100%;
+
+    padding:
+      20px;
+  }
+
+  .modalContent {
+    padding:
+      22px;
+  }
+}
+
+/* =========================================================
+   PANTALLAS MUY PEQUEÑAS
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+  .brandText strong {
+    font-size: 0.95rem;
+  }
+
+  .brandText span {
+    display: none;
+  }
+
+  .novaModes {
+    grid-template-columns:
+      1fr;
+  }
+}
+
+/* =========================================================
+   REDUCIR MOVIMIENTO
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  #nova {
+    opacity: 0.35;
+  }
+
+}
+
+/* =========================================================
+   ACCESIBILIDAD
+   ========================================================= */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline:
+    2px solid var(--cyan);
+
+  outline-offset:
+    3px;
+}
+
+/* =========================================================
+   SELECCIÓN
+   ========================================================= */
+
+::selection {
+  background:
+    rgba(0, 229, 255, 0.28);
+
+  color:
+    white;
+}
+
+/* =========================================================
+   BARRAS DE DESPLAZAMIENTO
+   ========================================================= */
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background:
+    rgba(0, 0, 0, 0.12);
+}
+
+::-webkit-scrollbar-thumb {
+  background:
+    linear-gradient(
+      var(--cyan),
+      var(--violet)
+    );
+
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background:
+    linear-gradient(
+      var(--violet),
+      var(--pink)
+    );
+}
