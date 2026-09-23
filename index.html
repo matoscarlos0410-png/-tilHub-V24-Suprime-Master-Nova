@@ -8,46 +8,26 @@
     content="width=device-width, initial-scale=1.0, viewport-fit=cover"
   >
 
-  <meta
-    name="theme-color"
-    content="#050914"
-  >
+  <meta name="theme-color" content="#050914">
 
   <meta
     name="description"
     content="ÚtilHub V24 — herramientas útiles, productividad y NOVA FLOW."
   >
 
-  <meta
-    name="application-name"
-    content="ÚtilHub"
-  >
+  <meta name="application-name" content="ÚtilHub">
 
-  <meta
-    name="apple-mobile-web-app-capable"
-    content="yes"
-  >
-
-  <meta
-    name="apple-mobile-web-app-status-bar-style"
-    content="black-translucent"
-  >
-
-  <meta
-    name="apple-mobile-web-app-title"
-    content="ÚtilHub"
-  >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ÚtilHub">
 
   <title>ÚtilHub V24 — NOVA FLOW</title>
 
-  <!-- =====================================================
-       MANIFEST
-       ===================================================== -->
-
+  <!-- PWA -->
   <link rel="manifest" href="./manifest.webmanifest">
 
   <!-- =====================================================
-       ICONO ÚTILHUB V24 — 100% EN CÓDIGO
+       ICONO ÚTILHUB V24 — SVG EN CÓDIGO
        ===================================================== -->
 
   <link
@@ -56,10 +36,6 @@
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='n' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2300e5ff'/%3E%3Cstop offset='.5' stop-color='%237b61ff'/%3E%3Cstop offset='1' stop-color='%23ff4ecd'/%3E%3C/linearGradient%3E%3Cfilter id='g'%3E%3CfeGaussianBlur stdDeviation='12' result='b'/%3E%3CfeMerge%3E%3CfeMergeNode in='b'/%3E%3CfeMergeNode in='SourceGraphic'/%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3Crect width='512' height='512' rx='120' fill='%23050914'/%3E%3Ccircle cx='256' cy='256' r='180' fill='none' stroke='url(%23n)' stroke-width='18' opacity='.35' filter='url(%23g)'/%3E%3Ccircle cx='256' cy='256' r='150' fill='none' stroke='url(%23n)' stroke-width='22'/%3E%3Cpath d='M160 256h192M256 160v192' stroke='url(%23n)' stroke-width='28' stroke-linecap='round'/%3E%3Ccircle cx='256' cy='256' r='42' fill='url(%23n)'/%3E%3Ccircle cx='256' cy='256' r='14' fill='%23fff'/%3E%3C/svg%3E"
   >
 
-  <!-- =====================================================
-       ESTILOS
-       ===================================================== -->
-
   <link rel="stylesheet" href="./style.css">
 </head>
 
@@ -67,15 +43,6 @@
 
   <!-- =====================================================
        NOVA FLOW V24
-       =====================================================
-
-       IMPORTANTE:
-       Este canvas es FIXED y ocupa toda la pantalla.
-
-       Por eso la animación NO pertenece únicamente al
-       encabezado. Permanecerá detrás de TODO el sitio.
-
-       script.js controlará los 120 modos únicos.
        ===================================================== -->
 
   <canvas
@@ -83,14 +50,13 @@
     aria-hidden="true"
   ></canvas>
 
-  <!-- Capa ambiental global -->
   <div
     id="novaGlow"
     aria-hidden="true"
   ></div>
 
   <!-- =====================================================
-       CONTENEDOR PRINCIPAL
+       APLICACIÓN
        ===================================================== -->
 
   <div id="app">
@@ -101,17 +67,18 @@
 
     <header class="topbar">
 
-      <div class="brand">
+      <a
+        href="#home"
+        class="brand"
+        aria-label="Ir al inicio de ÚtilHub"
+      >
 
-        <div
-          class="brandIcon"
-          aria-hidden="true"
-        >
-          <svg
-            viewBox="0 0 100 100"
-            role="img"
-          >
+        <div class="brandIcon" aria-hidden="true">
+
+          <svg viewBox="0 0 100 100">
+
             <defs>
+
               <linearGradient
                 id="brandGradient"
                 x1="0"
@@ -119,21 +86,11 @@
                 x2="1"
                 y2="1"
               >
-                <stop
-                  offset="0%"
-                  stop-color="#00e5ff"
-                />
-
-                <stop
-                  offset="50%"
-                  stop-color="#7b61ff"
-                />
-
-                <stop
-                  offset="100%"
-                  stop-color="#ff4ecd"
-                />
+                <stop offset="0%" stop-color="#00e5ff"/>
+                <stop offset="50%" stop-color="#7b61ff"/>
+                <stop offset="100%" stop-color="#ff4ecd"/>
               </linearGradient>
+
             </defs>
 
             <circle
@@ -158,7 +115,9 @@
               r="10"
               fill="url(#brandGradient)"
             />
+
           </svg>
+
         </div>
 
         <div class="brandText">
@@ -166,13 +125,11 @@
           <span>V24 · NOVA FLOW</span>
         </div>
 
-      </div>
-
-      <!-- Controles superiores -->
+      </a>
 
       <nav
         class="topActions"
-        aria-label="Controles principales"
+        aria-label="Controles de ÚtilHub"
       >
 
         <button
@@ -180,6 +137,7 @@
           class="iconButton"
           type="button"
           title="Cambiar tema"
+          aria-label="Cambiar tema"
         >
           ◐
         </button>
@@ -188,7 +146,8 @@
           id="motionBtn"
           class="iconButton"
           type="button"
-          title="Activar o desactivar animaciones"
+          title="Activar o desactivar NOVA FLOW"
+          aria-label="Activar o desactivar animaciones"
         >
           ✦
         </button>
@@ -198,6 +157,7 @@
           class="iconButton"
           type="button"
           title="Modo concentración"
+          aria-label="Modo concentración"
         >
           ⌖
         </button>
@@ -206,11 +166,16 @@
 
     </header>
 
+
     <!-- ===================================================
-         HERO
+         CONTENIDO PRINCIPAL
          =================================================== -->
 
     <main>
+
+      <!-- =================================================
+           INICIO
+           ================================================= -->
 
       <section
         id="home"
@@ -231,7 +196,8 @@
 
           <p>
             Herramientas para estudiar, organizarte,
-            convertir unidades, trabajar con texto y mucho más.
+            convertir unidades, trabajar con texto
+            y resolver tareas cotidianas.
           </p>
 
           <div class="heroActions">
@@ -249,12 +215,13 @@
               class="secondaryButton"
               type="button"
             >
-              NOVA FLOW
+              Abrir NOVA FLOW
             </button>
 
           </div>
 
         </div>
+
 
         <!-- Estadísticas -->
 
@@ -279,8 +246,9 @@
 
       </section>
 
+
       <!-- =================================================
-           PANEL NOVA FLOW
+           NOVA FLOW
            ================================================= -->
 
       <section
@@ -291,16 +259,18 @@
         <div class="sectionHeading">
 
           <div>
+
             <span class="sectionKicker">
-              SISTEMA VISUAL
+              SISTEMA VISUAL V24
             </span>
 
-            <h2>NOVA FLOW V24</h2>
+            <h2>NOVA FLOW</h2>
 
             <p>
-              120 animaciones con comportamientos visuales
-              independientes.
+              120 animaciones diseñadas con comportamientos
+              visuales independientes.
             </p>
+
           </div>
 
           <div
@@ -312,7 +282,8 @@
 
         </div>
 
-        <!-- Información del motor -->
+
+        <!-- Información -->
 
         <div class="novaInfoGrid">
 
@@ -331,14 +302,14 @@
             <span>FPS</span>
 
             <strong id="fps">
-              -- 
+              --
             </strong>
 
           </div>
 
           <div class="novaInfoCard">
 
-            <span>Animaciones</span>
+            <span>Modos</span>
 
             <strong>
               120
@@ -348,11 +319,13 @@
 
         </div>
 
-        <!-- Controles -->
+
+        <!-- Controles NOVA -->
 
         <div class="novaControls">
 
           <label>
+
             <span>Intensidad</span>
 
             <input
@@ -363,9 +336,12 @@
               step="0.01"
               value="0.8"
             >
+
           </label>
 
+
           <label>
+
             <span>Rendimiento</span>
 
             <select id="performanceSelect">
@@ -378,7 +354,10 @@
                 Alto
               </option>
 
-              <option value="balanced" selected>
+              <option
+                value="balanced"
+                selected
+              >
                 Equilibrado
               </option>
 
@@ -391,7 +370,9 @@
               </option>
 
             </select>
+
           </label>
+
 
           <button
             id="globalFxBtn"
@@ -400,6 +381,7 @@
           >
             Efectos globales
           </button>
+
 
           <button
             id="parallaxBtn"
@@ -411,31 +393,19 @@
 
         </div>
 
-        <!-- ===============================================
-             SELECTOR DE 120 ANIMACIONES
-             =============================================== -->
+
+        <!-- =================================================
+             LOS 120 MODOS SERÁN GENERADOS POR SCRIPT.JS
+             ================================================= -->
 
         <div
           id="novaModes"
           class="novaModes"
-        >
-
-          <!--
-            script.js generará aquí los 120 modos.
-
-            Cada modo tendrá una implementación visual
-            diferente.
-
-            No se utilizará simplemente:
-
-            "misma animación + diferente color"
-
-            sino sistemas independientes.
-          -->
-
-        </div>
+          aria-label="Modos de NOVA FLOW"
+        ></div>
 
       </section>
+
 
       <!-- =================================================
            HERRAMIENTAS
@@ -449,6 +419,7 @@
         <div class="sectionHeading">
 
           <div>
+
             <span class="sectionKicker">
               CENTRO DE HERRAMIENTAS
             </span>
@@ -458,9 +429,11 @@
             <p>
               Encuentra rápidamente lo que necesitas.
             </p>
+
           </div>
 
         </div>
+
 
         <!-- Buscador -->
 
@@ -485,11 +458,13 @@
 
         </div>
 
+
         <!-- Categorías -->
 
         <div
           id="categories"
           class="categories"
+          aria-label="Categorías"
         >
 
           <button
@@ -558,16 +533,16 @@
 
         </div>
 
-        <!-- Grid -->
+
+        <!-- Herramientas dinámicas -->
 
         <div
           id="toolGrid"
           class="toolGrid"
-        >
-          <!-- script.js inserta las herramientas -->
-        </div>
+        ></div>
 
       </section>
+
 
       <!-- =================================================
            ACCESO RÁPIDO
@@ -581,6 +556,7 @@
         <div class="sectionHeading">
 
           <div>
+
             <span class="sectionKicker">
               ACCESO RÁPIDO
             </span>
@@ -588,8 +564,9 @@
             <h2>Tus herramientas</h2>
 
             <p>
-              Accede rápidamente a lo que utilizaste antes.
+              Accede rápidamente a tus herramientas recientes.
             </p>
+
           </div>
 
           <button
@@ -605,14 +582,13 @@
         <div
           id="quickTools"
           class="quickTools"
-        >
-          <!-- script.js -->
-        </div>
+        ></div>
 
       </section>
 
+
       <!-- =================================================
-           UTILIDADES PERSONALES
+           PRODUCTIVIDAD
            ================================================= -->
 
       <section
@@ -623,6 +599,7 @@
         <div class="sectionHeading">
 
           <div>
+
             <span class="sectionKicker">
               PRODUCTIVIDAD
             </span>
@@ -630,11 +607,13 @@
             <h2>Tu espacio</h2>
 
             <p>
-              Notas, tareas y listas guardadas localmente.
+              Organiza tus notas, tareas y listas.
             </p>
+
           </div>
 
         </div>
+
 
         <div class="personalGrid">
 
@@ -648,6 +627,7 @@
             <small>Guarda tus ideas.</small>
           </button>
 
+
           <button
             class="featureCard"
             data-open="tasks"
@@ -658,6 +638,7 @@
             <small>Organiza tus pendientes.</small>
           </button>
 
+
           <button
             class="featureCard"
             data-open="shopping"
@@ -667,6 +648,7 @@
             <strong>Lista de compras</strong>
             <small>Organiza lo que necesitas.</small>
           </button>
+
 
           <button
             class="featureCard"
@@ -682,8 +664,9 @@
 
       </section>
 
+
       <!-- =================================================
-           IMPORTAR / EXPORTAR
+           DATOS
            ================================================= -->
 
       <section
@@ -694,6 +677,7 @@
         <div class="sectionHeading">
 
           <div>
+
             <span class="sectionKicker">
               DATOS
             </span>
@@ -703,9 +687,11 @@
             <p>
               Guarda o recupera tu configuración de ÚtilHub.
             </p>
+
           </div>
 
         </div>
+
 
         <div class="dataActions">
 
@@ -717,6 +703,7 @@
             Exportar datos
           </button>
 
+
           <button
             id="importBtn"
             class="secondaryButton"
@@ -724,6 +711,7 @@
           >
             Importar datos
           </button>
+
 
           <input
             id="importFile"
@@ -738,6 +726,7 @@
 
     </main>
 
+
     <!-- ===================================================
          FOOTER
          =================================================== -->
@@ -747,10 +736,12 @@
       <div class="footerBrand">
 
         <div class="footerIcon">
+
           <svg
             viewBox="0 0 100 100"
             aria-hidden="true"
           >
+
             <circle
               cx="50"
               cy="50"
@@ -773,15 +764,20 @@
               r="9"
               fill="currentColor"
             />
+
           </svg>
+
         </div>
 
         <div>
+
           <strong>ÚtilHub V24</strong>
           <span>NOVA FLOW</span>
+
         </div>
 
       </div>
+
 
       <div
         id="connectionStatus"
@@ -790,6 +786,7 @@
         Comprobando conexión...
       </div>
 
+
       <p>
         Herramientas útiles en un solo lugar.
       </p>
@@ -797,6 +794,7 @@
     </footer>
 
   </div>
+
 
   <!-- =====================================================
        PANEL DE HERRAMIENTA
@@ -812,6 +810,7 @@
       class="toolPanelBackdrop"
       data-close-tool
     ></div>
+
 
     <div class="toolPanelContent">
 
@@ -833,6 +832,7 @@
 
         </div>
 
+
         <button
           id="closeTool"
           class="iconButton"
@@ -844,14 +844,16 @@
 
       </div>
 
+
       <div id="toolContent"></div>
 
     </div>
 
   </aside>
 
+
   <!-- =====================================================
-       MODAL GENERAL
+       MODAL
        ===================================================== -->
 
   <div
@@ -864,6 +866,7 @@
       class="modalBackdrop"
       data-close-modal
     ></div>
+
 
     <div class="modalContent">
 
@@ -882,8 +885,9 @@
 
   </div>
 
+
   <!-- =====================================================
-       TOAST
+       NOTIFICACIONES
        ===================================================== -->
 
   <div
@@ -893,11 +897,15 @@
     aria-live="polite"
   ></div>
 
+
   <!-- =====================================================
-       SCRIPT PRINCIPAL
+       SCRIPT
        ===================================================== -->
 
-  <script src="./script.js" defer></script>
+  <script
+    src="./script.js"
+    defer
+  ></script>
 
 </body>
 </html>
